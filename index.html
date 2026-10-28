@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>グラグラ・タワービルダー | かまた祭展示ゲーム</title>
+  <meta name="description" content="オープンキャンパスで大熱狂！タイミングと物理演算で限界まで積み上げるタワーバランスパズルゲーム。">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏗️</text></svg>">
+</head>
+<body>
+  <div id="game-container">
+    <!-- 背景・ゲーム描画Canvas -->
+    <canvas id="game-canvas"></canvas>
+
+    <!-- ヘッダーHUD -->
+    <header class="hud-header">
+      <div class="hud-top-row">
+        <div class="title-area">
+          <div class="festival-badge">🎪 かまた祭 2026 展示中</div>
+          <h1>グラグラ・タワービルダー</h1>
+        </div>
+        <div class="hud-controls">
+          <button id="btn-sound" class="icon-btn" title="サウンド切替" aria-label="サウンド切替">🔊</button>
+          <button id="btn-reset" class="icon-btn" title="最初からやり直す" aria-label="リセット">🔄</button>
+        </div>
+      </div>
+
+      <!-- スコア・ステータスボード -->
+      <div class="score-board">
+        <div class="stat-item">
+          <span class="stat-label">FLOORS</span>
+          <span id="score-display" class="stat-value score">0</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">HEIGHT</span>
+          <span id="height-display" class="stat-value height">0.0m</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">BEST</span>
+          <span id="best-display" class="stat-value">0</span>
+        </div>
+        <div class="stability-indicator">
+          <span class="stat-label">BALANCE</span>
+          <span id="balance-badge" class="stability-badge stable">STABLE</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- 操作ガイド（タップまたはスペースキーで投下） -->
+    <div id="instruction-guide" class="instruction-overlay">
+      <span>🖱️ クリック / <span class="key-badge">SPACE</span> で投下！</span>
+    </div>
+
+    <!-- ゲームオーバー・リザルトモーダル -->
+    <div id="gameover-modal" class="modal-overlay">
+      <div class="result-card">
+        <span class="result-badge">TOWER COLLAPSED!</span>
+        <h2 class="result-title">タワー崩壊！</h2>
+        
+        <div class="result-stats-grid">
+          <div class="result-stat-box">
+            <div class="box-label">積み上げた段数</div>
+            <div id="result-score" class="box-value">0</div>
+          </div>
+          <div class="result-stat-box">
+            <div class="box-label">到達タワー高度</div>
+            <div id="result-height" class="box-value">0.0m</div>
+          </div>
+        </div>
+
+        <div class="rank-box">
+          <div class="rank-label">ARCHITECT RANK</div>
+          <div id="result-rank" class="rank-title">見習いビルダー</div>
+        </div>
+
+        <button id="btn-retry" class="retry-btn">
+          <span>もう一度挑戦する</span> 🔄
+        </button>
+        <div class="retry-hint">※ クリック または スペースキー でリトライ</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- スクリプト読込 (Matter.js -> Sound -> Game) -->
+  <script src="js/matter.min.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
